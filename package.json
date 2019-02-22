@@ -1,0 +1,52 @@
+{
+  "name": "gatsby-typescript-starter-blog",
+  "description": "Gatsby Typescript Starter Blog",
+  "version": "1.0.0",
+  "author": "Frank Ahn <frankahn9@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "start": "npm run develop",
+    "format": "prettier --write \"{,!(node_modules|public|coverage|.cache)/**/}*.{js,jsx,ts,tsx,json}\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "gatsby",
+    "typescript"
+  ],
+  "dependencies": {
+    "gatsby": "2.1.19",
+    "gatsby-image": "2.0.30",
+    "gatsby-plugin-manifest": "2.0.20",
+    "gatsby-plugin-netlify": "2.0.11",
+    "gatsby-plugin-offline": "2.0.24",
+    "gatsby-plugin-react-helmet": "3.0.7",
+    "gatsby-plugin-sharp": "2.0.23",
+    "gatsby-plugin-typescript": "2.0.9",
+    "gatsby-remark-external-links": "0.0.4",
+    "gatsby-remark-images": "3.0.5",
+    "gatsby-remark-responsive-iframe": "2.0.9",
+    "gatsby-source-filesystem": "2.0.23",
+    "gatsby-transformer-remark": "2.3.0",
+    "gatsby-transformer-sharp": "2.1.15",
+    "prop-types": "15.7.2",
+    "react": "16.8.3",
+    "react-dom": "16.8.3",
+    "react-helmet": "5.2.0",
+    "typescript": "3.3.3333"
+  },
+  "devDependencies": {
+    "@kj/tslint-rules": "2.0.1",
+    "@types/node": "11.10.4",
+    "@types/react": "16.8.6",
+    "@types/react-dom": "16.8.2",
+    "@types/react-helmet": "5.0.8",
+    "prettier": "1.16.4",
+    "tslint": "5.13.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frnki/gatsby-typescript-starter-blog"
+  }
+}
