@@ -1,0 +1,123 @@
+diff --git a/node_modules/gatsby/index.d.ts b/node_modules/gatsby/index.d.ts
+index a8b6de4..b08d892 100644
+--- a/node_modules/gatsby/index.d.ts
++++ b/node_modules/gatsby/index.d.ts
+@@ -1,7 +1,15 @@
+ import * as React from "react"
+ import { EventEmitter } from "events"
+-import { WindowLocation } from "@reach/router"
++import { WindowLocation, NavigateFn } from "@reach/router"
+ import { createContentDigest } from "gatsby-core-utils"
++import {
++  ComposeEnumTypeConfig,
++  ComposeInputObjectTypeConfig,
++  ComposeInterfaceTypeConfig,
++  ComposeObjectTypeConfig,
++  ComposeScalarTypeConfig,
++  ComposeUnionTypeConfig,
++} from "graphql-compose"
+ 
+ export {
+   default as Link,
+@@ -648,8 +656,8 @@ export interface CreateDevServerArgs extends ParentSpanPluginArgs {
+   app: any
+ }
+ 
+-export interface CreateNodeArgs extends ParentSpanPluginArgs {
+-  node: Node
++export interface CreateNodeArgs<T extends object = {}> extends ParentSpanPluginArgs {
++  node: Node & T
+   traceId: string
+   traceTags: {
+     nodeId: string
+@@ -687,9 +695,72 @@ export interface SetFieldsOnGraphQLNodeTypeArgs extends ParentSpanPluginArgs {
+   traceId: "initial-setFieldsOnGraphQLNodeType"
+ }
+ 
+-export interface SourceNodesArgs extends ParentSpanPluginArgs {
++enum GatsbyGraphQLTypeKind {
++  OBJECT = 'OBJECT',
++  INPUT_OBJECT = 'INPUT_OBJECT',
++  UNION = 'UNION',
++  INTERFACE = 'INTERFACE',
++  ENUM = 'ENUM',
++  SCALAR = 'SCALAR',
++}
++
++export interface GatsbyGraphQLObjectType<TSource = any, TContext = any> {
++  kind: GatsbyGraphQLTypeKind.OBJECT
++  config: ComposeObjectTypeConfig<TSource, TContext>
++}
++
++interface GatsbyGraphQLInputObjectType {
++  kind: GatsbyGraphQLTypeKind.INPUT_OBJECT
++  config: ComposeInputObjectTypeConfig
++}
++
++interface GatsbyGraphQLUnionType<TSource = any, TContext = any> {
++  kind: GatsbyGraphQLTypeKind.UNION
++  config: ComposeUnionTypeConfig<TSource, TContext>
++}
++
++interface GatsbyGraphQLInterfaceType<TSource = any, TContext = any> {
++  kind: GatsbyGraphQLTypeKind.INTERFACE
++  config: ComposeInterfaceTypeConfig<TSource, TContext>
++}
++
++interface GatsbyGraphQLEnumType {
++  kind: GatsbyGraphQLTypeKind.ENUM
++  config: ComposeEnumTypeConfig
++}
++
++interface GatsbyGraphQLScalarType {
++  kind: GatsbyGraphQLTypeKind.SCALAR
++  config: ComposeScalarTypeConfig
++}
++
++export type GatsbyGraphQLType<TSource = any, TContext = any> =
++  | GatsbyGraphQLObjectType
++  | GatsbyGraphQLInputObjectType
++  | GatsbyGraphQLUnionType<TSource, TContext>
++  | GatsbyGraphQLInterfaceType<TSource, TContext>
++  | GatsbyGraphQLEnumType
++  | GatsbyGraphQLScalarType
++
++export interface SourceNodesSchemaObject<TSource = any, TContext = any> {
++  buildObjectType(
++    config: ComposeObjectTypeConfig<TSource, TContext>,
++  ): GatsbyGraphQLObjectType<TSource, TContext>
++  buildUnionType(
++    config: ComposeUnionTypeConfig<TSource, TContext>,
++  ): GatsbyGraphQLUnionType<TSource, TContext>
++  buildInterfaceType(
++    config: ComposeInterfaceTypeConfig<TSource, TContext>,
++  ): GatsbyGraphQLInterfaceType<TSource, TContext>
++  buildInputObjectType(config: ComposeInputObjectTypeConfig): GatsbyGraphQLInputObjectType
++  buildEnumType(config: ComposeEnumTypeConfig): GatsbyGraphQLEnumType
++  buildScalarType(config: ComposeScalarTypeConfig): GatsbyGraphQLScalarType
++}
++
++export interface SourceNodesArgs<TSource = any, TContext = any> extends ParentSpanPluginArgs {
+   traceId: "initial-sourceNodes"
+   waitForCascadingActions: boolean
++  schema: SourceNodesSchemaObject<TSource, TContext>
+ }
+ 
+ export interface CreateResolversArgs extends ParentSpanPluginArgs {
+@@ -1118,12 +1189,13 @@ export interface ReplaceComponentRendererArgs extends BrowserPluginArgs {
+     path: string
+     "*": string
+     uri: string
+-    location: object
+-    navigate: Function
++    location: Location
++    navigate: NavigateFn
+     children: undefined
+     pageResources: object
+     data: object
+-    pageContext: object
++    pageContext: { id: string } & object
++    pathContext: { id: string } & object
+   }
+   loader: object
+ }

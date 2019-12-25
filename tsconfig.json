@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "lib": ["dom", "esnext"],
+    "jsx": "react",
+    "moduleResolution": "node",
+    "noImplicitReturns": true,
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "pretty": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowUnreachableCode": false,
+    "experimentalDecorators": true,
+    "strict": true,
+    "alwaysStrict": true,
+    "resolveJsonModule": true,
+    "preserveWatchOutput": true,
+    "allowJs": true,
+    "noEmit": true,
+    "declaration": false,
+    "skipLibCheck": true,
+    "plugins": [{ "name": "@divyenduz/ts-graphql-plugin" }, { "name": "typescript-styled-plugin" }],
+    "baseUrl": "./",
+    "paths": {
+      "@generated/gatsby": ["generated/gatsby.ts"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "*.js", ".eslintrc.js", "**/.babelrc.js"],
+  "exclude": ["**/dist", "**/lib/"]
+}

@@ -2,7 +2,7 @@
 
 ## Features
 
-- TypeScript & TSLint
+- TypeScript & ESLINT
 - Minimal settings (No Styling)
 
 ## Development
