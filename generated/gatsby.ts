@@ -2424,8 +2424,6 @@ export type QuerySiteArgs = {
   children: Maybe<NodeFilterListInput>,
   internal: Maybe<InternalFilterInput>,
   siteMetadata: Maybe<SiteSiteMetadataFilterInput>,
-  port: Maybe<IntQueryOperatorInput>,
-  host: Maybe<StringQueryOperatorInput>,
   polyfill: Maybe<BooleanQueryOperatorInput>,
   pathPrefix: Maybe<StringQueryOperatorInput>,
   buildTime: Maybe<DateQueryOperatorInput>
@@ -2496,8 +2494,6 @@ export type Site = Node & {
   children: Array<Node>,
   internal: Internal,
   siteMetadata: Maybe<SiteSiteMetadata>,
-  port: Maybe<Scalars['Int']>,
-  host: Maybe<Scalars['String']>,
   polyfill: Maybe<Scalars['Boolean']>,
   pathPrefix: Maybe<Scalars['String']>,
   buildTime: Maybe<Scalars['Date']>,
@@ -2627,7 +2623,8 @@ export enum SiteFieldsEnum {
   internal___mediaType = 'internal___mediaType',
   internal___owner = 'internal___owner',
   internal___type = 'internal___type',
-  siteMetadata___url = 'siteMetadata___url',
+  siteMetadata___siteUrl = 'siteMetadata___siteUrl',
+  siteMetadata___description = 'siteMetadata___description',
   siteMetadata___title = 'siteMetadata___title',
   siteMetadata___subtitle = 'siteMetadata___subtitle',
   siteMetadata___copyright = 'siteMetadata___copyright',
@@ -2652,8 +2649,6 @@ export enum SiteFieldsEnum {
   siteMetadata___author___contacts___weibo = 'siteMetadata___author___contacts___weibo',
   siteMetadata___author___contacts___codepen = 'siteMetadata___author___contacts___codepen',
   siteMetadata___author___contacts___youtube = 'siteMetadata___author___contacts___youtube',
-  port = 'port',
-  host = 'host',
   polyfill = 'polyfill',
   pathPrefix = 'pathPrefix',
   buildTime = 'buildTime'
@@ -2665,8 +2660,6 @@ export type SiteFilterInput = {
   children: Maybe<NodeFilterListInput>,
   internal: Maybe<InternalFilterInput>,
   siteMetadata: Maybe<SiteSiteMetadataFilterInput>,
-  port: Maybe<IntQueryOperatorInput>,
-  host: Maybe<StringQueryOperatorInput>,
   polyfill: Maybe<BooleanQueryOperatorInput>,
   pathPrefix: Maybe<StringQueryOperatorInput>,
   buildTime: Maybe<DateQueryOperatorInput>,
@@ -2891,14 +2884,9 @@ export enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___plugins___browserAPIs = 'pluginCreator___pluginOptions___plugins___browserAPIs',
   pluginCreator___pluginOptions___plugins___ssrAPIs = 'pluginCreator___pluginOptions___plugins___ssrAPIs',
   pluginCreator___pluginOptions___plugins___pluginFilepath = 'pluginCreator___pluginOptions___plugins___pluginFilepath',
-  pluginCreator___pluginOptions___typeDefsOutputPath = 'pluginCreator___pluginOptions___typeDefsOutputPath',
   pluginCreator___pluginOptions___extensions = 'pluginCreator___pluginOptions___extensions',
   pluginCreator___pluginOptions___name = 'pluginCreator___pluginOptions___name',
   pluginCreator___pluginOptions___path = 'pluginCreator___pluginOptions___path',
-  pluginCreator___pluginOptions___feeds = 'pluginCreator___pluginOptions___feeds',
-  pluginCreator___pluginOptions___feeds___query = 'pluginCreator___pluginOptions___feeds___query',
-  pluginCreator___pluginOptions___feeds___output = 'pluginCreator___pluginOptions___feeds___output',
-  pluginCreator___pluginOptions___feeds___title = 'pluginCreator___pluginOptions___feeds___title',
   pluginCreator___pluginOptions___maxWidth = 'pluginCreator___pluginOptions___maxWidth',
   pluginCreator___pluginOptions___withWebp = 'pluginCreator___pluginOptions___withWebp',
   pluginCreator___pluginOptions___target = 'pluginCreator___pluginOptions___target',
@@ -2908,6 +2896,10 @@ export enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___pluginConfig___head = 'pluginCreator___pluginOptions___pluginConfig___head',
   pluginCreator___pluginOptions___query = 'pluginCreator___pluginOptions___query',
   pluginCreator___pluginOptions___output = 'pluginCreator___pluginOptions___output',
+  pluginCreator___pluginOptions___feeds = 'pluginCreator___pluginOptions___feeds',
+  pluginCreator___pluginOptions___feeds___query = 'pluginCreator___pluginOptions___feeds___query',
+  pluginCreator___pluginOptions___feeds___output = 'pluginCreator___pluginOptions___feeds___output',
+  pluginCreator___pluginOptions___feeds___title = 'pluginCreator___pluginOptions___feeds___title',
   pluginCreator___pluginOptions___short_name = 'pluginCreator___pluginOptions___short_name',
   pluginCreator___pluginOptions___start_url = 'pluginCreator___pluginOptions___start_url',
   pluginCreator___pluginOptions___background_color = 'pluginCreator___pluginOptions___background_color',
@@ -2915,6 +2907,7 @@ export enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___display = 'pluginCreator___pluginOptions___display',
   pluginCreator___pluginOptions___icon = 'pluginCreator___pluginOptions___icon',
   pluginCreator___pluginOptions___fonts = 'pluginCreator___pluginOptions___fonts',
+  pluginCreator___pluginOptions___typeDefsOutputPath = 'pluginCreator___pluginOptions___typeDefsOutputPath',
   pluginCreator___pluginOptions___pathCheck = 'pluginCreator___pluginOptions___pathCheck',
   pluginCreator___nodeAPIs = 'pluginCreator___nodeAPIs',
   pluginCreator___browserAPIs = 'pluginCreator___browserAPIs',
@@ -3120,14 +3113,9 @@ export enum SitePluginFieldsEnum {
   pluginOptions___plugins___browserAPIs = 'pluginOptions___plugins___browserAPIs',
   pluginOptions___plugins___ssrAPIs = 'pluginOptions___plugins___ssrAPIs',
   pluginOptions___plugins___pluginFilepath = 'pluginOptions___plugins___pluginFilepath',
-  pluginOptions___typeDefsOutputPath = 'pluginOptions___typeDefsOutputPath',
   pluginOptions___extensions = 'pluginOptions___extensions',
   pluginOptions___name = 'pluginOptions___name',
   pluginOptions___path = 'pluginOptions___path',
-  pluginOptions___feeds = 'pluginOptions___feeds',
-  pluginOptions___feeds___query = 'pluginOptions___feeds___query',
-  pluginOptions___feeds___output = 'pluginOptions___feeds___output',
-  pluginOptions___feeds___title = 'pluginOptions___feeds___title',
   pluginOptions___maxWidth = 'pluginOptions___maxWidth',
   pluginOptions___withWebp = 'pluginOptions___withWebp',
   pluginOptions___target = 'pluginOptions___target',
@@ -3137,6 +3125,10 @@ export enum SitePluginFieldsEnum {
   pluginOptions___pluginConfig___head = 'pluginOptions___pluginConfig___head',
   pluginOptions___query = 'pluginOptions___query',
   pluginOptions___output = 'pluginOptions___output',
+  pluginOptions___feeds = 'pluginOptions___feeds',
+  pluginOptions___feeds___query = 'pluginOptions___feeds___query',
+  pluginOptions___feeds___output = 'pluginOptions___feeds___output',
+  pluginOptions___feeds___title = 'pluginOptions___feeds___title',
   pluginOptions___short_name = 'pluginOptions___short_name',
   pluginOptions___start_url = 'pluginOptions___start_url',
   pluginOptions___background_color = 'pluginOptions___background_color',
@@ -3144,6 +3136,7 @@ export enum SitePluginFieldsEnum {
   pluginOptions___display = 'pluginOptions___display',
   pluginOptions___icon = 'pluginOptions___icon',
   pluginOptions___fonts = 'pluginOptions___fonts',
+  pluginOptions___typeDefsOutputPath = 'pluginOptions___typeDefsOutputPath',
   pluginOptions___pathCheck = 'pluginOptions___pathCheck',
   nodeAPIs = 'nodeAPIs',
   browserAPIs = 'browserAPIs',
@@ -3268,11 +3261,9 @@ export type SitePluginPackageJsonPeerDependenciesFilterListInput = {
 export type SitePluginPluginOptions = {
    __typename?: 'SitePluginPluginOptions',
   plugins: Maybe<Array<Maybe<SitePluginPluginOptionsPlugins>>>,
-  typeDefsOutputPath: Maybe<Scalars['String']>,
   extensions: Maybe<Array<Maybe<Scalars['String']>>>,
   name: Maybe<Scalars['String']>,
   path: Maybe<Scalars['String']>,
-  feeds: Maybe<Array<Maybe<SitePluginPluginOptionsFeeds>>>,
   maxWidth: Maybe<Scalars['Int']>,
   withWebp: Maybe<Scalars['Boolean']>,
   target: Maybe<Scalars['String']>,
@@ -3282,6 +3273,7 @@ export type SitePluginPluginOptions = {
   pluginConfig: Maybe<SitePluginPluginOptionsPluginConfig>,
   query: Maybe<Scalars['String']>,
   output: Maybe<Scalars['String']>,
+  feeds: Maybe<Array<Maybe<SitePluginPluginOptionsFeeds>>>,
   short_name: Maybe<Scalars['String']>,
   start_url: Maybe<Scalars['String']>,
   background_color: Maybe<Scalars['String']>,
@@ -3289,6 +3281,7 @@ export type SitePluginPluginOptions = {
   display: Maybe<Scalars['String']>,
   icon: Maybe<Scalars['String']>,
   fonts: Maybe<Array<Maybe<Scalars['String']>>>,
+  typeDefsOutputPath: Maybe<Scalars['String']>,
   pathCheck: Maybe<Scalars['Boolean']>,
 };
 
@@ -3311,11 +3304,9 @@ export type SitePluginPluginOptionsFeedsFilterListInput = {
 
 export type SitePluginPluginOptionsFilterInput = {
   plugins: Maybe<SitePluginPluginOptionsPluginsFilterListInput>,
-  typeDefsOutputPath: Maybe<StringQueryOperatorInput>,
   extensions: Maybe<StringQueryOperatorInput>,
   name: Maybe<StringQueryOperatorInput>,
   path: Maybe<StringQueryOperatorInput>,
-  feeds: Maybe<SitePluginPluginOptionsFeedsFilterListInput>,
   maxWidth: Maybe<IntQueryOperatorInput>,
   withWebp: Maybe<BooleanQueryOperatorInput>,
   target: Maybe<StringQueryOperatorInput>,
@@ -3325,6 +3316,7 @@ export type SitePluginPluginOptionsFilterInput = {
   pluginConfig: Maybe<SitePluginPluginOptionsPluginConfigFilterInput>,
   query: Maybe<StringQueryOperatorInput>,
   output: Maybe<StringQueryOperatorInput>,
+  feeds: Maybe<SitePluginPluginOptionsFeedsFilterListInput>,
   short_name: Maybe<StringQueryOperatorInput>,
   start_url: Maybe<StringQueryOperatorInput>,
   background_color: Maybe<StringQueryOperatorInput>,
@@ -3332,6 +3324,7 @@ export type SitePluginPluginOptionsFilterInput = {
   display: Maybe<StringQueryOperatorInput>,
   icon: Maybe<StringQueryOperatorInput>,
   fonts: Maybe<StringQueryOperatorInput>,
+  typeDefsOutputPath: Maybe<StringQueryOperatorInput>,
   pathCheck: Maybe<BooleanQueryOperatorInput>,
 };
 
@@ -3395,7 +3388,8 @@ export type SitePluginSortInput = {
 
 export type SiteSiteMetadata = {
    __typename?: 'SiteSiteMetadata',
-  url: Maybe<Scalars['String']>,
+  siteUrl: Maybe<Scalars['String']>,
+  description: Maybe<Scalars['String']>,
   title: Maybe<Scalars['String']>,
   subtitle: Maybe<Scalars['String']>,
   copyright: Maybe<Scalars['String']>,
@@ -3455,7 +3449,8 @@ export type SiteSiteMetadataAuthorFilterInput = {
 };
 
 export type SiteSiteMetadataFilterInput = {
-  url: Maybe<StringQueryOperatorInput>,
+  siteUrl: Maybe<StringQueryOperatorInput>,
+  description: Maybe<StringQueryOperatorInput>,
   title: Maybe<StringQueryOperatorInput>,
   subtitle: Maybe<StringQueryOperatorInput>,
   copyright: Maybe<StringQueryOperatorInput>,
@@ -3545,7 +3540,7 @@ export type SiteMetaDataQuery = (
     { __typename?: 'Site' }
     & { siteMetadata: Maybe<(
       { __typename?: 'SiteSiteMetadata' }
-      & Pick<SiteSiteMetadata, 'url' | 'title' | 'subtitle' | 'copyright' | 'disqusShortname'>
+      & Pick<SiteSiteMetadata, 'siteUrl' | 'title' | 'subtitle' | 'copyright' | 'disqusShortname'>
       & { author: Maybe<(
         { __typename?: 'SiteSiteMetadataAuthor' }
         & Pick<SiteSiteMetadataAuthor, 'name' | 'bio' | 'photo'>

@@ -6,7 +6,8 @@ import { parseTypographyGoogleFonts } from './src/theme';
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    url: siteConfig.url,
+    siteUrl: siteConfig.url,
+    description: siteConfig.subtitle,
     title: siteConfig.title,
     subtitle: siteConfig.subtitle,
     copyright: siteConfig.copyright,
@@ -15,12 +16,6 @@ const config: GatsbyConfig = {
     author: siteConfig.author,
   },
   plugins: [
-    {
-      resolve: 'gatsby-plugin-typegen',
-      options: {
-        typeDefsOutputPath: `${__dirname}/generated/gatsby.ts`,
-      },
-    },
     {
       resolve: 'gatsby-plugin-mdx',
       options: {
@@ -34,10 +29,7 @@ const config: GatsbyConfig = {
         path: 'content/writings',
       },
     },
-    {
-      resolve: 'gatsby-plugin-feed',
-      options: feed,
-    },
+
     {
       resolve: `gatsby-transformer-remark`,
       options: {
@@ -89,7 +81,7 @@ const config: GatsbyConfig = {
           {
             site {
               siteMetadata {
-                siteUrl: url
+                siteUrl
               }
             }
             allSitePage(
@@ -113,6 +105,11 @@ const config: GatsbyConfig = {
             priority: 0.7,
           })),
       },
+    },
+
+    {
+      resolve: 'gatsby-plugin-feed',
+      options: feed,
     },
     {
       resolve: `gatsby-plugin-manifest`,
@@ -140,6 +137,12 @@ const config: GatsbyConfig = {
     },
     'gatsby-plugin-twitter',
     'gatsby-plugin-theme-ui',
+    {
+      resolve: 'gatsby-plugin-typegen',
+      options: {
+        typeDefsOutputPath: `${__dirname}/generated/gatsby.ts`,
+      },
+    },
   ],
 };
 

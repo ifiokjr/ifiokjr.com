@@ -8,6 +8,7 @@
     "build": "gatsby build",
     "develop": "gatsby develop",
     "start": "yarn develop",
+    "serve": "gatsby serve",
     "lint": "eslint -f friendly --ext=.tsx,.ts,.js .",
     "fix": "yarn lint --fix",
     "postinstall": "patch-package",

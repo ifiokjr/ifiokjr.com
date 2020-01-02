@@ -32,7 +32,7 @@ export const useSiteMetadata = () => {
               label
               path
             }
-            url
+            siteUrl
             title
             subtitle
             copyright
