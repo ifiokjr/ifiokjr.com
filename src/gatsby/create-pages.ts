@@ -52,10 +52,10 @@ export const createPages = async ({ graphql, actions, reporter }: CreatePagesArg
     return;
   }
 
-  const posts = result.data.allPost.edges.map((e: any) => e.node);
-  const list = result.data.allPost.edges.map((e: any) => e.node);
+  const posts = result.data.allPost.edges.map(e => e.node);
+  const list = result.data.allPost.edges.map(e => e.node);
 
-  posts.forEach((post: any) => {
+  posts.forEach(post => {
     actions.createPage({
       path: post.slug,
       component: require.resolve('../templates/post-template.tsx'),

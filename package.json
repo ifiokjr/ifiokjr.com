@@ -23,6 +23,7 @@
     "@emotion/core": "^10.0.27",
     "@mdx-js/mdx": "^1.5.3",
     "@mdx-js/react": "^1.5.3",
+    "@theme-ui/components": "^0.2.50",
     "@theme-ui/prism": "^0.2.50",
     "@theme-ui/typography": "^0.2.46",
     "deepmerge": "4.2.2",
@@ -32,8 +33,8 @@
     "gatsby-plugin-catch-links": "^2.1.21",
     "gatsby-plugin-feed": "^2.3.25",
     "gatsby-plugin-flow": "^1.1.17",
+    "gatsby-plugin-google-analytics": "^2.1.31",
     "gatsby-plugin-google-fonts": "1.0.1",
-    "gatsby-plugin-google-gtag": "^1.1.19",
     "gatsby-plugin-manifest": "^2.2.34",
     "gatsby-plugin-mdx": "^1.0.64",
     "gatsby-plugin-netlify": "^2.1.30",
@@ -78,6 +79,7 @@
     "source-map-support": "^0.5.16",
     "theme-ui": "^0.2.52",
     "ts-node": "^8.5.4",
+    "type-fest": "0.8.1",
     "typography-theme-twin-peaks": "^0.16.19"
   },
   "devDependencies": {
@@ -88,6 +90,7 @@
     "@types/react-dom": "^16.9.4",
     "@types/react-helmet": "^5.0.14",
     "@types/theme-ui": "^0.2.6",
+    "@types/theme-ui__components": "^0.2.0",
     "@typescript-eslint/eslint-plugin": "^2.14.0",
     "@typescript-eslint/parser": "^2.14.0",
     "eslint": "^6.8.0",

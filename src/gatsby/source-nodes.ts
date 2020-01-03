@@ -1,7 +1,8 @@
 import { SourceNodesArgs } from 'gatsby';
 import { GraphQLFieldResolver, GraphQLObjectType } from 'graphql';
 
-import { Maybe } from '../types';
+import { Category, Maybe } from '../types';
+import { values } from '../utils';
 
 const mdxResolverPassthrough = (fieldName: string): GraphQLFieldResolver<any, any> => async (
   source,
@@ -25,8 +26,20 @@ export const sourceNodes = <TSource = any, TContext = any>({
   actions,
   schema,
 }: SourceNodesArgs<TSource, TContext>) => {
-  actions.createTypes(
-    schema.buildObjectType({
+  const { createTypes } = actions;
+  const { buildEnumType, buildObjectType } = schema;
+
+  createTypes([
+    buildEnumType({
+      name: 'PostCategory',
+      description: 'The category of the post',
+      values: {
+        [Category.Creative]: { value: Category.Creative, description: 'For creative posts' },
+        [Category.Personal]: { value: Category.Personal, description: 'For personal posts' },
+        [Category.Technology]: { value: Category.Technology, description: 'For technology related posts' },
+      },
+    }),
+    buildObjectType({
       name: 'Post',
       fields: {
         id: { type: 'ID!' },
@@ -46,6 +59,14 @@ export const sourceNodes = <TSource = any, TContext = any>({
         tags: {
           type: '[String]!',
         },
+        category: {
+          type: 'PostCategory',
+        },
+        timeToRead: {
+          type: 'Int',
+          description: 'The time to read the article in minutes',
+          resolve: mdxResolverPassthrough('timeToRead'),
+        },
         excerpt: {
           type: 'String!',
           args: {
@@ -64,8 +85,12 @@ export const sourceNodes = <TSource = any, TContext = any>({
           type: 'String!',
           resolve: mdxResolverPassthrough('html'),
         },
+        wordCount: {
+          type: 'MdxWordCount',
+          resolve: mdxResolverPassthrough('wordCount'),
+        },
       },
       interfaces: ['Node'],
     }),
-  );
+  ]);
 };

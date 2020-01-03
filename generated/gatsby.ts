@@ -700,6 +700,8 @@ export enum FileFieldsEnum {
   childMdx___fileAbsolutePath = 'childMdx___fileAbsolutePath',
   childMdx___frontmatter___title = 'childMdx___frontmatter___title',
   childMdx___frontmatter___date = 'childMdx___frontmatter___date',
+  childMdx___frontmatter___tags = 'childMdx___frontmatter___tags',
+  childMdx___frontmatter___category = 'childMdx___frontmatter___category',
   childMdx___body = 'childMdx___body',
   childMdx___excerpt = 'childMdx___excerpt',
   childMdx___headings = 'childMdx___headings',
@@ -753,6 +755,8 @@ export enum FileFieldsEnum {
   childMarkdownRemark___id = 'childMarkdownRemark___id',
   childMarkdownRemark___frontmatter___title = 'childMarkdownRemark___frontmatter___title',
   childMarkdownRemark___frontmatter___date = 'childMarkdownRemark___frontmatter___date',
+  childMarkdownRemark___frontmatter___tags = 'childMarkdownRemark___frontmatter___tags',
+  childMarkdownRemark___frontmatter___category = 'childMarkdownRemark___frontmatter___category',
   childMarkdownRemark___excerpt = 'childMarkdownRemark___excerpt',
   childMarkdownRemark___rawMarkdownBody = 'childMarkdownRemark___rawMarkdownBody',
   childMarkdownRemark___fileAbsolutePath = 'childMarkdownRemark___fileAbsolutePath',
@@ -1544,6 +1548,8 @@ export enum MarkdownRemarkFieldsEnum {
   id = 'id',
   frontmatter___title = 'frontmatter___title',
   frontmatter___date = 'frontmatter___date',
+  frontmatter___tags = 'frontmatter___tags',
+  frontmatter___category = 'frontmatter___category',
   excerpt = 'excerpt',
   rawMarkdownBody = 'rawMarkdownBody',
   fileAbsolutePath = 'fileAbsolutePath',
@@ -1667,6 +1673,8 @@ export type MarkdownRemarkFrontmatter = {
    __typename?: 'MarkdownRemarkFrontmatter',
   title: Maybe<Scalars['String']>,
   date: Maybe<Scalars['Date']>,
+  tags: Maybe<Array<Maybe<Scalars['String']>>>,
+  category: Maybe<Scalars['String']>,
 };
 
 
@@ -1680,6 +1688,8 @@ export type MarkdownRemarkFrontmatterDateArgs = {
 export type MarkdownRemarkFrontmatterFilterInput = {
   title: Maybe<StringQueryOperatorInput>,
   date: Maybe<DateQueryOperatorInput>,
+  tags: Maybe<StringQueryOperatorInput>,
+  category: Maybe<StringQueryOperatorInput>,
 };
 
 export type MarkdownRemarkGroupConnection = {
@@ -1778,6 +1788,8 @@ export enum MdxFieldsEnum {
   fileAbsolutePath = 'fileAbsolutePath',
   frontmatter___title = 'frontmatter___title',
   frontmatter___date = 'frontmatter___date',
+  frontmatter___tags = 'frontmatter___tags',
+  frontmatter___category = 'frontmatter___category',
   body = 'body',
   excerpt = 'excerpt',
   headings = 'headings',
@@ -1900,6 +1912,8 @@ export type MdxFrontmatter = {
    __typename?: 'MdxFrontmatter',
   title: Scalars['String'],
   date: Maybe<Scalars['Date']>,
+  tags: Maybe<Array<Maybe<Scalars['String']>>>,
+  category: Maybe<Scalars['String']>,
 };
 
 
@@ -1913,6 +1927,8 @@ export type MdxFrontmatterDateArgs = {
 export type MdxFrontmatterFilterInput = {
   title: Maybe<StringQueryOperatorInput>,
   date: Maybe<DateQueryOperatorInput>,
+  tags: Maybe<StringQueryOperatorInput>,
+  category: Maybe<StringQueryOperatorInput>,
 };
 
 export type MdxGroupConnection = {
@@ -1995,9 +2011,13 @@ export type Post = Node & {
   date: Maybe<Scalars['Date']>,
   draft: Maybe<Scalars['Boolean']>,
   tags: Array<Maybe<Scalars['String']>>,
+  category: Maybe<PostCategory>,
+  /** The time to read the article in minutes */
+  timeToRead: Maybe<Scalars['Int']>,
   excerpt: Scalars['String'],
   body: Scalars['String'],
   html: Scalars['String'],
+  wordCount: Maybe<MdxWordCount>,
   parent: Maybe<Node>,
   children: Array<Node>,
   internal: Internal,
@@ -2014,6 +2034,23 @@ export type PostDateArgs = {
 
 export type PostExcerptArgs = {
   pruneLength?: Maybe<Scalars['Int']>
+};
+
+/** The category of the post */
+export enum PostCategory {
+  /** For creative posts */
+  Creative = 'Creative',
+  /** For personal posts */
+  Personal = 'Personal',
+  /** For technology related posts */
+  Technology = 'Technology'
+}
+
+export type PostCategoryQueryOperatorInput = {
+  eq: Maybe<PostCategory>,
+  ne: Maybe<PostCategory>,
+  in: Maybe<Array<Maybe<PostCategory>>>,
+  nin: Maybe<Array<Maybe<PostCategory>>>,
 };
 
 export type PostConnection = {
@@ -2052,9 +2089,14 @@ export enum PostFieldsEnum {
   date = 'date',
   draft = 'draft',
   tags = 'tags',
+  category = 'category',
+  timeToRead = 'timeToRead',
   excerpt = 'excerpt',
   body = 'body',
   html = 'html',
+  wordCount___paragraphs = 'wordCount___paragraphs',
+  wordCount___sentences = 'wordCount___sentences',
+  wordCount___words = 'wordCount___words',
   parent___id = 'parent___id',
   parent___parent___id = 'parent___parent___id',
   parent___parent___parent___id = 'parent___parent___parent___id',
@@ -2149,9 +2191,12 @@ export type PostFilterInput = {
   date: Maybe<DateQueryOperatorInput>,
   draft: Maybe<BooleanQueryOperatorInput>,
   tags: Maybe<StringQueryOperatorInput>,
+  category: Maybe<PostCategoryQueryOperatorInput>,
+  timeToRead: Maybe<IntQueryOperatorInput>,
   excerpt: Maybe<StringQueryOperatorInput>,
   body: Maybe<StringQueryOperatorInput>,
   html: Maybe<StringQueryOperatorInput>,
+  wordCount: Maybe<MdxWordCountFilterInput>,
   parent: Maybe<NodeFilterInput>,
   children: Maybe<NodeFilterListInput>,
   internal: Maybe<InternalFilterInput>,
@@ -2401,9 +2446,12 @@ export type QueryPostArgs = {
   date: Maybe<DateQueryOperatorInput>,
   draft: Maybe<BooleanQueryOperatorInput>,
   tags: Maybe<StringQueryOperatorInput>,
+  category: Maybe<PostCategoryQueryOperatorInput>,
+  timeToRead: Maybe<IntQueryOperatorInput>,
   excerpt: Maybe<StringQueryOperatorInput>,
   body: Maybe<StringQueryOperatorInput>,
   html: Maybe<StringQueryOperatorInput>,
+  wordCount: Maybe<MdxWordCountFilterInput>,
   parent: Maybe<NodeFilterInput>,
   children: Maybe<NodeFilterListInput>,
   internal: Maybe<InternalFilterInput>
@@ -2424,6 +2472,8 @@ export type QuerySiteArgs = {
   children: Maybe<NodeFilterListInput>,
   internal: Maybe<InternalFilterInput>,
   siteMetadata: Maybe<SiteSiteMetadataFilterInput>,
+  port: Maybe<IntQueryOperatorInput>,
+  host: Maybe<StringQueryOperatorInput>,
   polyfill: Maybe<BooleanQueryOperatorInput>,
   pathPrefix: Maybe<StringQueryOperatorInput>,
   buildTime: Maybe<DateQueryOperatorInput>
@@ -2494,6 +2544,8 @@ export type Site = Node & {
   children: Array<Node>,
   internal: Internal,
   siteMetadata: Maybe<SiteSiteMetadata>,
+  port: Maybe<Scalars['Int']>,
+  host: Maybe<Scalars['String']>,
   polyfill: Maybe<Scalars['Boolean']>,
   pathPrefix: Maybe<Scalars['String']>,
   buildTime: Maybe<Scalars['Date']>,
@@ -2649,6 +2701,8 @@ export enum SiteFieldsEnum {
   siteMetadata___author___contacts___weibo = 'siteMetadata___author___contacts___weibo',
   siteMetadata___author___contacts___codepen = 'siteMetadata___author___contacts___codepen',
   siteMetadata___author___contacts___youtube = 'siteMetadata___author___contacts___youtube',
+  port = 'port',
+  host = 'host',
   polyfill = 'polyfill',
   pathPrefix = 'pathPrefix',
   buildTime = 'buildTime'
@@ -2660,6 +2714,8 @@ export type SiteFilterInput = {
   children: Maybe<NodeFilterListInput>,
   internal: Maybe<InternalFilterInput>,
   siteMetadata: Maybe<SiteSiteMetadataFilterInput>,
+  port: Maybe<IntQueryOperatorInput>,
+  host: Maybe<StringQueryOperatorInput>,
   polyfill: Maybe<BooleanQueryOperatorInput>,
   pathPrefix: Maybe<StringQueryOperatorInput>,
   buildTime: Maybe<DateQueryOperatorInput>,
@@ -2892,8 +2948,7 @@ export enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___target = 'pluginCreator___pluginOptions___target',
   pluginCreator___pluginOptions___rel = 'pluginCreator___pluginOptions___rel',
   pluginCreator___pluginOptions___wrapperStyle = 'pluginCreator___pluginOptions___wrapperStyle',
-  pluginCreator___pluginOptions___trackingIds = 'pluginCreator___pluginOptions___trackingIds',
-  pluginCreator___pluginOptions___pluginConfig___head = 'pluginCreator___pluginOptions___pluginConfig___head',
+  pluginCreator___pluginOptions___trackingId = 'pluginCreator___pluginOptions___trackingId',
   pluginCreator___pluginOptions___query = 'pluginCreator___pluginOptions___query',
   pluginCreator___pluginOptions___output = 'pluginCreator___pluginOptions___output',
   pluginCreator___pluginOptions___feeds = 'pluginCreator___pluginOptions___feeds',
@@ -3121,8 +3176,7 @@ export enum SitePluginFieldsEnum {
   pluginOptions___target = 'pluginOptions___target',
   pluginOptions___rel = 'pluginOptions___rel',
   pluginOptions___wrapperStyle = 'pluginOptions___wrapperStyle',
-  pluginOptions___trackingIds = 'pluginOptions___trackingIds',
-  pluginOptions___pluginConfig___head = 'pluginOptions___pluginConfig___head',
+  pluginOptions___trackingId = 'pluginOptions___trackingId',
   pluginOptions___query = 'pluginOptions___query',
   pluginOptions___output = 'pluginOptions___output',
   pluginOptions___feeds = 'pluginOptions___feeds',
@@ -3269,8 +3323,7 @@ export type SitePluginPluginOptions = {
   target: Maybe<Scalars['String']>,
   rel: Maybe<Scalars['String']>,
   wrapperStyle: Maybe<Scalars['String']>,
-  trackingIds: Maybe<Array<Maybe<Scalars['String']>>>,
-  pluginConfig: Maybe<SitePluginPluginOptionsPluginConfig>,
+  trackingId: Maybe<Scalars['String']>,
   query: Maybe<Scalars['String']>,
   output: Maybe<Scalars['String']>,
   feeds: Maybe<Array<Maybe<SitePluginPluginOptionsFeeds>>>,
@@ -3312,8 +3365,7 @@ export type SitePluginPluginOptionsFilterInput = {
   target: Maybe<StringQueryOperatorInput>,
   rel: Maybe<StringQueryOperatorInput>,
   wrapperStyle: Maybe<StringQueryOperatorInput>,
-  trackingIds: Maybe<StringQueryOperatorInput>,
-  pluginConfig: Maybe<SitePluginPluginOptionsPluginConfigFilterInput>,
+  trackingId: Maybe<StringQueryOperatorInput>,
   query: Maybe<StringQueryOperatorInput>,
   output: Maybe<StringQueryOperatorInput>,
   feeds: Maybe<SitePluginPluginOptionsFeedsFilterListInput>,
@@ -3326,15 +3378,6 @@ export type SitePluginPluginOptionsFilterInput = {
   fonts: Maybe<StringQueryOperatorInput>,
   typeDefsOutputPath: Maybe<StringQueryOperatorInput>,
   pathCheck: Maybe<BooleanQueryOperatorInput>,
-};
-
-export type SitePluginPluginOptionsPluginConfig = {
-   __typename?: 'SitePluginPluginOptionsPluginConfig',
-  head: Maybe<Scalars['Boolean']>,
-};
-
-export type SitePluginPluginOptionsPluginConfigFilterInput = {
-  head: Maybe<BooleanQueryOperatorInput>,
 };
 
 export type SitePluginPluginOptionsPlugins = {
@@ -3585,6 +3628,10 @@ export type PostQuery = (
   { __typename?: 'Query' }
   & { post: Maybe<(
     { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'date' | 'title' | 'body' | 'tags' | 'draft'>
+    & Pick<Post, 'id' | 'date' | 'title' | 'body' | 'tags' | 'category' | 'draft' | 'timeToRead'>
+    & { wordCount: Maybe<(
+      { __typename?: 'MdxWordCount' }
+      & Pick<MdxWordCount, 'paragraphs' | 'words' | 'sentences'>
+    )> }
   )> }
 );

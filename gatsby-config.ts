@@ -65,13 +65,11 @@ const config: GatsbyConfig = {
     'gatsby-plugin-react-helmet',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
+
     {
-      resolve: 'gatsby-plugin-google-gtag',
+      resolve: 'gatsby-plugin-google-analytics',
       options: {
-        trackingIds: [siteConfig.googleAnalyticsId],
-        pluginConfig: {
-          head: true,
-        },
+        trackingId: siteConfig.googleAnalyticsId,
       },
     },
     {

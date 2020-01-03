@@ -7,7 +7,7 @@ export interface PostData {
   excerpt?: string;
   draft?: boolean;
   tags?: string[];
-  category?: string;
+  category?: Category;
   socialImage?: string;
   template?: 'post';
   html?: string;
@@ -21,3 +21,9 @@ export type WithId<T extends object> = T & {
 export type TemplateProps = ReplaceComponentRendererArgs['props'];
 
 export type Maybe<T> = T | undefined | null;
+
+export enum Category {
+  Technology = 'Technology',
+  Creative = 'Creative',
+  Personal = 'Personal',
+}

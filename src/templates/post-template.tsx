@@ -28,7 +28,14 @@ export const query = graphql`
       title
       body
       tags
+      category
       draft
+      timeToRead
+      wordCount {
+        paragraphs
+        words
+        sentences
+      }
     }
   }
 `;

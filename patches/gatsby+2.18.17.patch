@@ -1,8 +1,8 @@
 diff --git a/node_modules/gatsby/index.d.ts b/node_modules/gatsby/index.d.ts
-index a8b6de4..b08d892 100644
+index a8b6de4..abe21a7 100644
 --- a/node_modules/gatsby/index.d.ts
 +++ b/node_modules/gatsby/index.d.ts
-@@ -1,7 +1,15 @@
+@@ -1,7 +1,16 @@
  import * as React from "react"
  import { EventEmitter } from "events"
 -import { WindowLocation } from "@reach/router"
@@ -16,10 +16,11 @@ index a8b6de4..b08d892 100644
 +  ComposeScalarTypeConfig,
 +  ComposeUnionTypeConfig,
 +} from "graphql-compose"
++import { GraphQLOutputType } from "graphql"
  
  export {
    default as Link,
-@@ -648,8 +656,8 @@ export interface CreateDevServerArgs extends ParentSpanPluginArgs {
+@@ -648,8 +657,8 @@ export interface CreateDevServerArgs extends ParentSpanPluginArgs {
    app: any
  }
  
@@ -30,7 +31,7 @@ index a8b6de4..b08d892 100644
    traceId: string
    traceTags: {
      nodeId: string
-@@ -687,9 +695,72 @@ export interface SetFieldsOnGraphQLNodeTypeArgs extends ParentSpanPluginArgs {
+@@ -687,9 +696,72 @@ export interface SetFieldsOnGraphQLNodeTypeArgs extends ParentSpanPluginArgs {
    traceId: "initial-setFieldsOnGraphQLNodeType"
  }
  
@@ -104,7 +105,16 @@ index a8b6de4..b08d892 100644
  }
  
  export interface CreateResolversArgs extends ParentSpanPluginArgs {
-@@ -1118,12 +1189,13 @@ export interface ReplaceComponentRendererArgs extends BrowserPluginArgs {
+@@ -912,7 +984,7 @@ export interface Actions {
+ 
+   /** @see https://www.gatsbyjs.org/docs/actions/#createTypes */
+   createTypes(
+-    types: string | object | Array<string | object>,
++    types: string | GraphQLOutputType | GatsbyGraphQLType | string[] | GraphQLOutputType[] | GatsbyGraphQLType[],
+     plugin?: ActionPlugin,
+     traceId?: string
+   ): void
+@@ -1118,12 +1190,13 @@ export interface ReplaceComponentRendererArgs extends BrowserPluginArgs {
      path: string
      "*": string
      uri: string

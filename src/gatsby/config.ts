@@ -28,7 +28,7 @@ const siteConfig = {
   ],
   author: {
     name: 'Ifiok Jr.',
-    photo: '/photo.jpg',
+    photo: '/me.jpg',
     bio: 'Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu.',
     contacts: {
       email: '',
