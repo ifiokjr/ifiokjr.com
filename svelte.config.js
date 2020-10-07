@@ -1,0 +1,1 @@
+/Users/ifiokjr/Coding/ifiokjr/ifiokjr.com/support/root/svelte.config.js

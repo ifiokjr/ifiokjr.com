@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "allowJs": true
+  },
+  "include": [
+    "../**/*.ts",
+    "../**/*.svelte",
+    "../**/*.js",
+    "../*.js",
+    "../.eslintrc.js",
+    "../**/.eslintrc.js",
+    "../**/.babelrc.js",
+    "./**/*.{ts,js}"
+  ],
+  "exclude": ["../**/dist/", "../**/public/", "../__sapper__/"]
+}

@@ -1,8 +1,1 @@
-public
-coverage
-node_modules
-!.babelrc.js
-!**/.babelrc.js
-!.eslintrc.js
-!**/.eslintrc.js
-generated
+/Users/ifiokjr/Coding/ifiokjr/ifiokjr.com/support/root/.eslintignore

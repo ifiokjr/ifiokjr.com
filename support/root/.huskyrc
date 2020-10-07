@@ -1,0 +1,7 @@
+{
+  "hooks": {
+    "pre-commit": "lint-staged",
+    "post-commit": "support/hooks/post-commit",
+    "pre-push": "pnpm checks && bash echo $HUSKY_GIT_STDIN | bash support/hooks/pre-push $HUSKY_GIT_PARAMS"
+  }
+}

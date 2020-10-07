@@ -70,3 +70,26 @@ yarn-error.log
 
 # Local Netlify folder
 .netlify
+
+/__sapper__/
+
+
+## Ignore root files
+/.eslintignore
+/.eslintrc.js
+/.size-limit.json
+/.stylelintignore
+/.stylelintrc.json
+/babel.config.js
+/globals.d.ts
+/jest.config.js
+/.vscode
+/.prettierrc.js
+/.huskyrc
+/.lintstagedrc
+/tsconfig.json
+/tsconfig.references.json
+/.markdownlint.json
+/svelte.config.js
+/postcss.config.js
+/static

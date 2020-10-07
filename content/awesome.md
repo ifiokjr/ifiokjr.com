@@ -1,0 +1,1 @@
+/Users/ifiokjr/Coding/ifiokjr/ifiokjr.com/src/routes/blog/awesome.md
