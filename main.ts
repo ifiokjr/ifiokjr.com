@@ -1,12 +1,13 @@
 import blog, { ga, redirects } from "https://deno.land/x/blog@0.3.3/blog.tsx";
 
 blog({
-  title: "undefined",
+  title: "Ifiok Jr.",
   description: "A collection of thoughts on development and personal life.",
-  cover: "https://deno-avatar.deno.dev/avatar/blog.svg",
-  coverStyle: "avatar-rounded",
+  avatar: "./ifiokjr.svg",
+  avatarClass: "full",
   author: "Ifiok Jr.",
   background: "#f9f9f9",
+  style: `.border-white {border: none;}`,
   links: [
     { title: "Email", url: "mailto:ifiokotung@gmail.com" },
     { title: "GitHub", url: "https://github.com/ifiokjr" },
@@ -19,5 +20,5 @@ blog({
     // If you want to provide some redirections, you can specify them here,
     // pathname specified in a key will redirect to pathname in the value.
     redirects({}),
-  ]
+  ],
 });
