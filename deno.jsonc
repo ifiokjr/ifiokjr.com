@@ -1,10 +1,12 @@
 {
   "tasks": {
     "check": "deno task typecheck && deno task fix && deno task lint",
+    "fix": "dprint fmt",
+    "lint": "deno lint",
     "dev": "deno run --allow-net --allow-read --allow-env=NODE_DEBUG --watch main.ts --dev",
     "serve": "deno run --allow-net --allow-read --no-check main.ts",
     "update": "dprint config update && deno run -A 'https://deno.land/x/udd@0.5.0/main.ts' main.ts",
-    "typecheck": "deno --unstable check ./mod.ts"
+    "typecheck": "deno --unstable check ./main.ts"
   },
   "compilerOptions": {
     "noUncheckedIndexedAccess": true,
