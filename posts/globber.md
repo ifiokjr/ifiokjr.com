@@ -7,7 +7,7 @@ Earlier this week I published my first rust crate; [`package_json_schema`](https
 
 Today I've followed up by publishing a small package for filtering files via globs.
 
-I named it [`globber`](https://github.com/ifiojr/globber).
+I named it [`globber`](https://github.com/ifiokjr/globber).
 
 Surprisingly, I found learning about [Deno](https://deno.land) tooling far more interesting that working on the published project.
 
