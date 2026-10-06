@@ -16,7 +16,6 @@ jobs:
   test:
     strategy:
       matrix:
-        deno: ['v1.x', 'canary']
         os:
           - macos-latest
           - ubuntu-latest
@@ -26,23 +25,25 @@ jobs:
 
     steps:
       - name: 🏴‍☠️ Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 📦 Cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ env.DENO_DIR }}
-          key: ${{ hashFiles('lock.json') }}-${{ matrix.deno }}-${{ matrix.os }}
+          key: deno-v2-${{ matrix.os }}-${{ hashFiles('main.ts', 'deno.jsonc') }}
 
       - name: 🦕 Setup
-        uses: denoland/setup-deno@v1
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
 
       - name: 🩺 Format
-        if: startsWith(matrix.os, 'ubuntu') && matrix.deno == 'canary'
+        if: startsWith(matrix.os, 'ubuntu')
         uses: dprint/check@v2.0
 
       - name: 👩‍⚕️ Lint
-        if: startsWith(matrix.os, 'ubuntu') && matrix.deno == 'canary'
+        if: startsWith(matrix.os, 'ubuntu')
         run: deno lint
 
       - name: 🩺 Typecheck
